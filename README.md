@@ -63,7 +63,7 @@ bun run src/server.ts
 Перед запуском тестов поднимаем `order-service` и `notification-service` в разных терминалах. Логи событий будут в терминале `notification-service`.
 
 Если запускать оба теста подряд, в `notification-service` будет **4 лога**:
-1. `order.created` — из `test-order-read` (там тоже вызывается `CreateOrder`, а значит событие уходит в RabbitMQ)
+1. `order.created` — из `test-order-read` (там тоже вызывается `CreateOrder`, а значит событие уходит в кролика)
 2. `order.created` — из `test-order-events`
 3. `order.confirmed` — из `test-order-events`
 4. `order.cancelled` — из `test-order-events`
