@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+package user_service;
+
+service UserService {
+    rpc CreateUser(CreateUserRequest) returns (CreateUserResponse);
+    rpc GetUserById(GetUserByIdRequest) returns (GetUserByIdResponse);
+    rpc GetUserProfile(GetUserProfileRequest) returns (GetUserProfileResponse);
+    rpc UpdateUserProfile(UpdateUserProfileRequest) returns (UpdateUserProfileResponse);
+}
+
+message CreateUserRequest {
+    string nickname = 1;
+    string email = 2;
+}
+
+message CreateUserResponse {
+    UserMessage user = 1;
+}
+
+message GetUserByIdRequest {
+    string userId = 1;
+}
+
+message GetUserByIdResponse {
+    UserMessage user = 1;
+}
+
+message GetUserProfileRequest {
+    string userId = 1;
+}
+
+message GetUserProfileResponse {
+    UserMessage user = 1;
+}
+
+message UpdateUserProfileRequest {
+    string userId = 1;
+    string nickname = 2;
+    string email = 3;
+}
+
+message UpdateUserProfileResponse {
+    UserMessage user = 1;
+}
+
+message UserMessage {
+    string id = 1;
+    string nickname = 2;
+    string email = 3;
+}
