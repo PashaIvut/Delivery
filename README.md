@@ -34,14 +34,6 @@ docker run -d --name delivery-mongo -p 27017:27017 mongo:7
 docker run -d --name delivery-rabbit -p 5672:5672 -p 15672:15672 rabbitmq:3-management
 ```
 
-RabbitMQ UI:
-
-`http://localhost:15672`
-
-Логин/пароль по умолчанию:
-
-`guest / guest`
-
 ## Генерация proto
 
 Из корня проекта:
