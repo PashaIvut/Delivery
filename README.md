@@ -44,6 +44,22 @@ bun run generate-proto
 
 ## Запуск сервисов
 
+Перед тестами поднимаются **все 4 сервиса** в отдельных терминалах. В каждом сервисе создаются `.env` на основе `.env.example`.
+
+### user-service
+
+```bash
+cd services/user-service
+bun run src/server.ts
+```
+
+### auth-service
+
+```bash
+cd services/auth-service
+bun run src/server.ts
+```
+
 ### order-service
 
 ```bash
@@ -60,7 +76,13 @@ bun run src/server.ts
 
 ## Проверка
 
-Перед запуском тестов поднимаем `order-service` и `notification-service` в разных терминалах. Логи событий будут в терминале `notification-service`.
+Логи событий — в терминале `notification-service`.
+
+Оба теста начинаются одинаково:
+1. `Register` в `auth-service` (внутри создаётся пользователь в `user-service`)
+2. `GetUserProfile` в `user-service`
+3. дальше — работа с заказами в `order-service`
+4. `notification-service` получает события из RabbitMQ автоматически
 
 Если запускать оба теста подряд, в `notification-service` будет **4 лога**:
 1. `order.created` — из `test-order-read` (там тоже вызывается `CreateOrder`, а значит событие уходит в кролика)
@@ -77,6 +99,8 @@ bun run test-order-read
 ```
 
 Проверяет:
+- `Register` 
+- `GetUserProfile`
 - `CreateOrder`
 - `GetOrderById`
 - `GetOrdersByUser`
@@ -91,7 +115,10 @@ bun run test-order-read
 bun run test-order-events
 ```
 
-Проверяет смену статуса заказа и публикацию событий в RabbitMQ.
+Проверяет:
+- `Register` 
+- `GetUserProfile`
+- смену статуса заказа и публикацию событий в RabbitMQ
 
 В терминале `notification-service` появятся **3 лога**:
 - `order.created`

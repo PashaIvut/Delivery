@@ -71,12 +71,12 @@ async function shutdown() {
 
   await new Promise<void>((resolve) => {
     grpcServer.tryShutdown(() => {
-      console.log("gRPC server shut down gracefully");
+      console.log("gRPC server shut down.");
       resolve();
     });
   });
 
-  console.log("Order service has been shut down gracefully.");
+  console.log("Order service has been shut down.");
   process.exit(0);
 }
 

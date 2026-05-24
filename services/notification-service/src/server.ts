@@ -31,7 +31,7 @@ async function shutdown() {
     await rabbitMQConnection.close();
   }
 
-  console.log("Notification service has been shut down gracefully.");
+  console.log("Notification service has been shut down.");
   process.exit(0);
 }
 
